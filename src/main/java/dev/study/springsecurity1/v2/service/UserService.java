@@ -17,6 +17,12 @@ public class UserService {
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
 
+    /**
+     * 회원 가입
+     * @param userName userName
+     * @param password password
+     * @return 성공 여부 , Error 발생시 Exception
+     */
     public String join(String userName, String password) {
 
         // username 중복 check
@@ -39,4 +45,12 @@ public class UserService {
     }
 
 
+    public String login(String userName, String password) {
+
+        // 비지니스 로직 추가 할 예정
+
+
+        return "token 리턴";
+
+    }
 }

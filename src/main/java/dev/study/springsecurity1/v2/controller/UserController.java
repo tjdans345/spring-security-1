@@ -1,8 +1,10 @@
 package dev.study.springsecurity1.v2.controller;
 
 import dev.study.springsecurity1.v2.domain.dto.UserJoinRequestDTO;
+import dev.study.springsecurity1.v2.domain.dto.UserLoginRequestDTO;
 import dev.study.springsecurity1.v2.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,6 +22,11 @@ public class UserController {
     public ResponseEntity<String> join(@RequestBody UserJoinRequestDTO userJoinRequestDTO) {
         userService.join(userJoinRequestDTO.getUserName(), userJoinRequestDTO.getPassword());
         return ResponseEntity.ok().body("회원가입이 성공 했습니다.");
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<String> login(@RequestBody UserLoginRequestDTO userLoginRequestDTO) {
+        return ResponseEntity.ok().body(userService.login(userLoginRequestDTO.getUserName(), userLoginRequestDTO.getPassword()));
     }
 
 }
