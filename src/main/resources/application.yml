@@ -1,2 +1,10 @@
 server:
   port: 9020
+  servlet:
+    session:
+      timeout: 10 # 10?? ???
+#      timeout: 10m # 10??? ??? ( m : ??? )
+      cookie:
+        max-age: 10
+        http-only: true
+
