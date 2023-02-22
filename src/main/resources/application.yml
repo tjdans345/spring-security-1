@@ -1,10 +1,21 @@
 server:
   port: 9020
-  servlet:
-    session:
-      timeout: 10 # 10?? ???
-#      timeout: 10m # 10??? ??? ( m : ??? )
-      cookie:
-        max-age: 10
-        http-only: true
 
+spring:
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://localhost:3306/security_test?characterEncoding=UTF-8&serverTimezone=UTC
+    username: security
+    password: security1234
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+      naming:
+        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyJpaCompliantImpl # Camel Case -> Snake Case
+    properties:
+      hibernate:
+        format_sql: true #To beautify or pretty print the SQL
+        show_sql: true #show sql
+
+    generate-ddl: false
