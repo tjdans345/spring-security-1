@@ -1,8 +1,11 @@
 package dev.study.springsecurity1.v2.service;
 
 import dev.study.springsecurity1.v2.domain.entity.User;
+import dev.study.springsecurity1.v2.exception.AppException;
+import dev.study.springsecurity1.v2.exception.ErrorCode;
 import dev.study.springsecurity1.v2.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 
@@ -11,6 +14,7 @@ import org.springframework.stereotype.Service;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
 
     public String join(String userName, String password) {
@@ -19,7 +23,7 @@ public class UserService {
         userRepository.findByUserName(userName)
                 // 체이닝으로 가능하다.
                 .ifPresent(user -> {
-                            throw new RuntimeException(userName + "는 이미 있습니다.");
+                            throw new AppException(ErrorCode.USERNAME_DUPLICATED, userName + "은 이미 있습니다.");
                 });
 
         // 저장
@@ -27,7 +31,7 @@ public class UserService {
                 .builder()
                 .userName(userName)
                 // 추 후 평문 -> 암호문으로 코드 수정할 것
-                .password(password)
+                .password(bCryptPasswordEncoder.encode(password))
                 .build()
         );
 
