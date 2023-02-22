@@ -17,5 +17,5 @@ spring:
       hibernate:
         format_sql: true #To beautify or pretty print the SQL
         show_sql: true #show sql
-
+    open-in-view: false
 #    generate-ddl: false

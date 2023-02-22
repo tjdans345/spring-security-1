@@ -20,8 +20,7 @@ public class UserService {
                 // 체이닝으로 가능하다.
                 .ifPresent(user -> {
                             throw new RuntimeException(userName + "는 이미 있습니다.");
-                        }
-                );
+                });
 
         // 저장
         userRepository.save(User
