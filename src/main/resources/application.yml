@@ -10,7 +10,7 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: none
+      ddl-auto: update
       naming:
         implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyJpaCompliantImpl # Camel Case -> Snake Case
     properties:
@@ -18,4 +18,4 @@ spring:
         format_sql: true #To beautify or pretty print the SQL
         show_sql: true #show sql
 
-    generate-ddl: false
+#    generate-ddl: false
