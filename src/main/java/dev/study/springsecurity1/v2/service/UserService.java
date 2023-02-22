@@ -32,7 +32,7 @@ public class UserService {
                             throw new AppException(ErrorCode.USERNAME_DUPLICATED, userName + "은 이미 있습니다.");
                 });
 
-        // 저장
+         // 저장
         userRepository.save(User
                 .builder()
                 .userName(userName)
@@ -40,17 +40,25 @@ public class UserService {
                 .password(bCryptPasswordEncoder.encode(password))
                 .build()
         );
-
         return "SUCCESS";
     }
 
 
     public String login(String userName, String password) {
 
-        // 비지니스 로직 추가 할 예정
+        // UserName 없음
+        User selectedUser = userRepository.findByUserName(userName).orElseThrow(() -> new AppException(ErrorCode.USERNAME_NOT_FOUND, userName + "이 없습니다."));
 
+        // password 틀림
+        // bCryptPasswordEncoder 를 이용해서 패스워드 매칭 검증
+        if(!bCryptPasswordEncoder.matches(selectedUser.getPassword() , password)) {
+            throw new AppException(ErrorCode.USER_PASSWORD_INVALID, "패스워드가 일치하지 않습니다.");
+        }
+
+        //
 
         return "token 리턴";
 
     }
+
 }

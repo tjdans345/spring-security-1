@@ -96,7 +96,7 @@ class UserControllerTest {
 
     @Test
     @DisplayName("로그인 성공")
-    @WithAnonymousUser
+    @WithMockUser
     void login_success() throws Exception {
 
         String userName = "meteor5";
@@ -116,7 +116,7 @@ class UserControllerTest {
 
     @Test
     @DisplayName("로그인 실패 - userName 없음")
-    @WithAnonymousUser
+    @WithMockUser
     void login_fail() throws Exception {
         String userName = "meteor5";
         String password = "meteor33";
@@ -126,6 +126,7 @@ class UserControllerTest {
 
 
         mockMvc.perform(post("/api/v1/users/login")
+                        .with(csrf())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsBytes(new UserLoginRequestDTO(userName, password))))
                 .andDo(print())
@@ -134,7 +135,7 @@ class UserControllerTest {
 
     @Test
     @DisplayName("로그인 실패 - 패스워드 틀림")
-    @WithAnonymousUser
+    @WithMockUser
     void login_fail2() throws Exception {
         String userName = "meteor5";
         String password = "meteor33";
@@ -144,7 +145,7 @@ class UserControllerTest {
 
 
         mockMvc.perform(post("/api/v1/users/login")
-//                        .with(csrf())
+                        .with(csrf())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsBytes(new UserLoginRequestDTO(userName, password))))
                 .andDo(print())
