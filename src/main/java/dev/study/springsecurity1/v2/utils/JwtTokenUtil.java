@@ -8,6 +8,15 @@ import java.util.Date;
 
 public class JwtTokenUtil {
 
+    /**
+     * 토큰 만료 시간 검증
+     * @param token token
+     * @param secretKey secretKey
+     * @return
+     */
+    public static boolean isExpired(String token, String secretKey) {
+        return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody().getExpiration().before(new Date());
+    }
 
 
     public static String createToken(String userName, String key, long expireTimes) {
