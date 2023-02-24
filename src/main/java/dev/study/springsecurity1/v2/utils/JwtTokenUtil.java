@@ -9,6 +9,17 @@ import java.util.Date;
 public class JwtTokenUtil {
 
     /**
+     * JWT 토큰 정보 출력하기  ( 유저 정보 )
+     * @param token token
+     * @param secretKey secretKey
+     * @return String
+     */
+    public static String getUserName(String token, String secretKey) {
+        return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token)
+                .getBody().get("userName", String.class);
+    }
+
+    /**
      * 토큰 만료 시간 검증
      * @param token token
      * @param secretKey secretKey
