@@ -2,6 +2,16 @@ server:
   port: 9020
 
 spring:
+
+  # ??? ?? ?? ?? ? ?? ?? ??? ?? ??
+  devtools:
+    livereload:
+      enabled: false
+
+  security:
+    user:
+      password: security_study_pw
+
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver
     url: jdbc:mariadb://localhost:3306/security_test?characterEncoding=UTF-8&serverTimezone=UTC

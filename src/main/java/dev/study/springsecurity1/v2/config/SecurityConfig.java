@@ -30,6 +30,7 @@ public class SecurityConfig {
                 .httpBasic().disable() // ui 쪽으로 접근을 막는 설정
                 .csrf().disable() // 크로스 사이트 기능 사용안하는 설정
                 .cors().and()
+//                .formLogin().disable()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
@@ -40,6 +41,8 @@ public class SecurityConfig {
                         .permitAll()
                         .anyRequest().authenticated()
                 )
+//                .oauth2Login()
+//                .and()
                 // 토큰을 검증하려면 시크릿 키가 필요하기 때문에 파라미터로 넣어준다.
                 // JWT 필터가 UsernamePasswordAuthenticationFilter 대신하여 인증을 한다.
                 .addFilterBefore(new JwtTokenFilter(userService, secretKey), UsernamePasswordAuthenticationFilter.class)

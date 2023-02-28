@@ -32,7 +32,9 @@ public class JwtTokenFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 
+//        final String authorization = request.getHeader(HttpHeaders.AUTHORIZATION);
         final String authorization = request.getHeader("Authorization");
+
 
         // 토큰이 없다면
         if(!StringUtils.hasText(authorization) || !authorization.startsWith("Bearer")) {
